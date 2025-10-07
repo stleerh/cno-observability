@@ -3,6 +3,11 @@
 ## Introduction
 
 This document shows you how to test this feature proposal.  It involves three OpenShift repositories, namely openshift/api, openshift/installer, and openshift/cluster-network-operator.
+- [api](https://github.com/stleerh/openshift-api)
+- [installer](https://github.com/stleerh/openshift-installer)
+- [cluster-network-operator](https://github.com/stleerh/openshift-cluster-network-operator)
+
+I prefix'ed the repository names with "openshift-" in my forked repos to show they are related.
 
 ## Proposal
 
