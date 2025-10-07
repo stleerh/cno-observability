@@ -56,7 +56,7 @@ Use this test setup if you simply want to run the code against your existing Ope
 
 ### Commands
 
-Issue these commands to set up your cluster.
+Issue these commands to set up your cluster.  The file, AAA_ungated.yaml, is in this repository.  You can also download it [here](https://raw.githubusercontent.com/stleerh/cno-observability/refs/heads/main/manifests/AAA_ungated.yaml).
 
 ```
 # Disable CVO from resetting the Network CR
@@ -66,6 +66,7 @@ oc scale deployment/cluster-version-operator -n openshift-cluster-version --repl
 oc set image deployment/network-operator -n openshift-network-operator network-operator=quay.io/stlee/cluster-network-operator:dev
 
 # Inform API server of the updated Network CRD
+# Get the yaml file in this repo or at https://github.com/stleerh/cno-observability/blob/main/manifests/AAA_ungated.yaml
 oc replace -f manifests/AAA_ungated.yaml
 ```
 
