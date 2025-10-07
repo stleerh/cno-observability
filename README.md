@@ -10,11 +10,11 @@ This change makes Network Observability available on day 0 by default.  That is,
 
 ## Background
 
-Network Observability is an optional operator that provides insights into your network traffic, including troubleshooting features like packet drops, latencies, DNS tracking, and more.  There is an upstream and downstream version, but you get more features and benefits when used in OpenShift, and specifically OpenShift Networking.  If you are running OpenShift Networking, it should be expected to have observability, unless it falls into an exceptional case (e.g. very limited resources).  The two should be bounded together.
+Network Observability is an optional operator that provides insights into your network traffic, including troubleshooting features like packet drops, latencies, DNS tracking, and more.  There is an upstream and downstream version, but you get more features and benefits when used in OpenShift, and specifically OpenShift Networking.  If you are running OpenShift Networking, it should be expected to have observability, unless it falls into an exceptional case (e.g. very limited resources).  The two should be bound together.
 
 ## How Does It Work
 
-`openshift-install` uses an install-config.yaml file to create manifests that are used to create an OpenShift cluster.  One of the manifest file is cluster-network-02-config.yml.  This is the configuration file, based on the Network CRD, that Cluster Network Operator (CNO) reads to bootstrap networking.  A new field, observabilityEnabled, when set to true, tells CNO to enable Network Observability.
+`openshift-install` uses an install-config.yaml file to create manifests that are used to create an OpenShift cluster.  One of the manifest files is cluster-network-02-config.yml.  This is the configuration file, based on the Network CRD, that Cluster Network Operator (CNO) reads to bootstrap networking.  A new field, observabilityEnabled, when set to true, tells CNO to enable Network Observability.
 
 ```
 spec:
@@ -33,7 +33,7 @@ The steps to enable Network Observability are as follows.  It is done only once 
 6. Check if a FlowCollector instance exists.  If yes, exit.
 7. Create a FlowCollector instance.
 
-It is important to note that CNO does not manage the lifecycle of Network Observability.  It doesn't upgrade Network Observability or monitor it.  It simply *enables* it and after that, it is on its own to be managed by its operator, NOO.  In fact, it doesn't even remove it, hence the field is called **observabilityEnabled** to indicate that it will just enable it and do nothing if this is set to false.
+It is important to note that CNO does not manage the lifecycle of Network Observability.  It doesn't upgrade Network Observability or monitor it.  It simply *enables* it, and after that, it is on its own to be managed by its operator, NOO.  In fact, it doesn't even remove it, hence the field is called **observabilityEnabled** to indicate that it will just enable it and do nothing if this is set to false.
 
 To make Network Observability enabled by default, the same field is introduced in install-config.yaml.  However, the behavior is slightly different.  If the **observabilityEnabled** field is not there, it is *enabled* by default, unlike the field in the Network CRD.  Therefore, you normally don't need to do anything, but if you don't want Network Observability, add this to install-config.yaml:
 
@@ -45,7 +45,7 @@ networking:
 This setting or the lack of it will determine the setting in the Network CRD.
 
 
-## Test: Run the Code
+## Test on Existing Cluster
 
 Use this test setup if you simply want to run the code against your existing OpenShift cluster and don't want to build the binaries.  Because the changes have not been committed to the official OpenShift repositories, there are additional commands you need to issue, such as to stop Cluster Version Operator (CVO) from resetting your changes.
 
@@ -104,7 +104,7 @@ Remove `observabilityEnabled` line.  Remove FlowCollector.
 
 ## Test: Build the Binaries
 
-Use this test setup if you want to build your own binaries.  You can then follow the instructions above to run the code using your binaries.
+Use this test setup if you want to build your own binaries.  You can then follow the instructions above to test on an existing cluster but using your binaries.
 
 ### Test cases for openshift-install
 
@@ -174,7 +174,7 @@ Run `../installer/bin/openshift-install create manifests`.  View the manifests/c
 
 #### Build openshift/cluster-network-operator
 
-Unlike installer, cluster-network-operator can and should use the latest branch of openshift/api.  It's probably the easiest to create another clone of api.
+Unlike openshift/installer, openshift/cluster-network-operator can and should use the latest branch of openshift/api.  It's probably the easiest to create another clone of api.
 
 ```
 git clone https://github.com/stleerh/openshift-api.git api2
@@ -210,7 +210,7 @@ podman build -f Dockerfile.sl -t $IMAGE_TAG .
 podman push $IMAGE_TAG
 ```
 
-You can now test with your CNO following the steps in "Run the Code".  The only difference is when you set the image, refer to your CNO on quay.io.
+You can now test with your CNO following the steps in "Test on Existing Cluster".  The only difference is when you set the image, refer to your CNO on quay.io.
 
 ```
 oc set image deployment/network-operator -n openshift-network-operator network-operator=quay.io/$(whoami)/cluster-network-operator:dev
