@@ -50,6 +50,14 @@ networking:
 This setting or the lack of it will determine the setting in the Network CRD.
 
 
+## Code Changes
+
+To view the code diffs,
+- [api](https://github.com/stleerh/openshift-api/commit/ffae1de2ce1feb73bde651540e0c3a276b62e8a7)
+- [install](https://github.com/stleerh/openshift-installer/commit/1a42ecd4a4f60caf218d59f4482b2ab9c1796c6c)
+- [cluster-network-operator](https://github.com/stleerh/openshift-cluster-network-operator/commit/387f905ff8bae0bc2c1d6de12adb2251d179536d)
+
+
 ## Test on Existing Cluster
 
 Use this test setup if you simply want to run the code against your existing OpenShift cluster and don't want to build the binaries.  Because the changes have not been committed to the official OpenShift repositories, there are additional commands you need to issue, such as to stop Cluster Version Operator (CVO) from resetting your changes.
