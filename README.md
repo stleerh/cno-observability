@@ -183,7 +183,7 @@ networking:
 
 Run `../installer/bin/openshift-install create install-config`.  View the modified install-config.yaml file.  The true and false cases should remain unchanged.  If the statement is not there, it sets it to true.  If it's a bad value, it rejects it.  Be sure to copy the install-config.yaml file after each test as it modifies the file.
 
-Run `../installer/bin/openshift-install create manifests`.  View the manifests/cluster-network-02-config.yml.  It should set the `observabilityEnabled` field as expected.
+Run `../installer/bin/openshift-install create manifests`.  View the manifests/cluster-network-02-config.yml.  It should set the `observabilityEnabled` field as expected.  Be sure to remove all the files in this directory and copy back the install-config.yaml file after each test.
 
 
 #### Build openshift/cluster-network-operator
