@@ -7,7 +7,7 @@ This document shows you how to test this feature proposal.  It involves three Op
 - [installer](https://github.com/stleerh/openshift-installer)
 - [cluster-network-operator](https://github.com/stleerh/openshift-cluster-network-operator)
 
-I prefix'ed the repository names with "openshift-" in my forked repos to show they are related.
+I prefix'ed the repository names with "openshift-" in my forked repos to show they are related.  The code changes are in the "cno-observability" branch of each repo.
 
 ## Proposal
 
