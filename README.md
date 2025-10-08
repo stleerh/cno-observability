@@ -168,7 +168,7 @@ This creates the binary at **bin/openshift-install**.
 
 #### Test openshift-install binary
 
-You can use the sample **install-config.yaml** file in the manifests/ directory to test your openshift-install binary.
+You can use the sample [**install-config.yaml**](https://raw.githubusercontent.com/stleerh/cno-observability/refs/heads/main/manifests/install-config.yaml) file in the manifests/ directory to test your openshift-install binary.
 ```
 mkdir cluster
 cd cluster
